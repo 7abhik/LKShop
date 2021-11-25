@@ -11,21 +11,22 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: 'dashboard',
         loadChildren: () =>
-          import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
+          import('./modules/dashboard.module').then((m) => m.DashboardModule),
       },
     ],
   },
   //Auth Routes
-
   {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('./modules/auth.module').then((m) => m.AuthModule),
+      },
+    ],
   },
 ];
 

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AboutComponent } from './about/about.component';
-import { HomeComponent } from './home/home.component';
-
+import { ProductFormComponent } from '../admin/product-form/product-form.component';
+import { AboutComponent } from '../dashboard/about/about.component';
+import { HomeComponent } from '../dashboard/home/home.component';
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
     children: [
       {
-        path: 'dashboard',
+        path: 'home',
         component: HomeComponent,
       },
     ],
@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'about',
     component: AboutComponent,
+  },
+  {
+    path: 'create-product',
+    component: ProductFormComponent,
   },
 ];
 
