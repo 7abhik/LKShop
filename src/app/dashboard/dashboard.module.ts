@@ -16,4 +16,4 @@ import { AboutComponent } from './about/about.component';
   ],
   imports: [CommonModule, DashboardRoutingModule],
 })
-export class DashboardModule {}
+export class DashboardModule {} 
