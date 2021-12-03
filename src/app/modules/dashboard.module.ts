@@ -6,6 +6,9 @@ import { NavbarComponent } from '../dashboard/navbar/navbar.component';
 import { SideNavComponent } from '../dashboard/side-nav/side-nav.component';
 import { HomeComponent } from '../dashboard/home/home.component';
 import { AboutComponent } from '../dashboard/about/about.component';
+import { ProductFormComponent } from '../admin/product-form/product-form.component';
+import { MemberFormComponent } from '../admin/member-form/member-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { AboutComponent } from '../dashboard/about/about.component';
     SideNavComponent,
     HomeComponent,
     AboutComponent,
+    MemberFormComponent,
+    ProductFormComponent,
   ],
-  imports: [CommonModule, DashboardRoutingModule],
+  imports: [CommonModule, DashboardRoutingModule, ReactiveFormsModule],
 })
-export class DashboardModule {} 
+export class DashboardModule {}

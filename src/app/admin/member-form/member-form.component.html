@@ -1,0 +1,91 @@
+<div class="pcoded-content">
+	<div class="pcoded-inner-content">
+
+		<!-- Main-body start -->
+		<div class="main-body">
+			<div class="page-wrapper">
+				<!-- Page-header start -->
+				<div class="page-header card">
+					<div class="card-block">
+						<h5 class="m-b-10">Add member</h5>
+						<p class="text-muted m-b-10">Add your staff member</p>
+					</div>
+				</div>
+
+				<div class="page-body">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+									<div class="card-header-right">
+										<i class="icofont icofont-spinner-alt-5"></i>
+									</div>
+
+								</div>
+								<div class="card-block">
+									<h4 class="sub-title">Enter your members detail</h4>
+									<form [formGroup]="profileData" (ngSubmit)="onSubmit()">
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Member name</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" formControlName="fullName">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Mobile No.</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" formControlName="mobile">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Join Date</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" formControlName="joinDate">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Age</label>
+											<div class="col-sm-10">
+												<input type="text" class="form-control" formControlName="age">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Select role</label>
+											<div class="col-sm-10">
+												<select name="" id="" class="form-control" formControlName="userRole">
+													<option disabled selected value="">Select role</option>
+													<option value="manager">manager</option>
+													<option value="staff">Staff</option>
+													<option value="cleaner">Cleaner</option>
+													<option value="chef">chef</option>
+													<option value="delivery-man">Delivery man</option>
+													<option value="other">Other</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Upload File</label>
+											<div class="col-sm-10">
+												<input type="file" class="form-control" formControleName="profileImage">
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-sm-2 col-form-label">Description</label>
+											<div class="col-sm-10">
+												<textarea rows="5" cols="5" class="form-control" formControlName="desc"></textarea>
+											</div>
+										</div>
+										<div class="text-center">
+											<button  class="btn btn-primary">Add member</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
