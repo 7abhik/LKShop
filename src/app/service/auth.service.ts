@@ -19,8 +19,11 @@ export class AuthService {
   ) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
-        this.userData = user;
-        localStorage.setItem('user', JSON.stringify(this.userData));
+        console.log(user.uid);
+        this.userService.getUserByuid(user.uid).then((appUser) => {
+					console.log(appUser);
+          localStorage.setItem('user', JSON.stringify(appUser[0]));
+        });
       } else {
         localStorage.setItem('user', null);
       }
@@ -51,19 +54,7 @@ export class AuthService {
     return false;
   }
 
-  get appUser$(): Observable<AppUser> {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const uid = user.uid;
-    if (user)
-      return this.userService.getUser(uid).pipe(
-        map((user) => {
-          return user;
-        })
-      );
-    return EMPTY;
-  }
-
   private loginCheck() {
-    return true;
+    return true; // here we verify token by token verify api
   }
 }
