@@ -17,6 +17,5 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appUser = this.userService.getUser();
   }
 }

@@ -2,48 +2,43 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import auth from 'firebase/app';
-import { EMPTY, Observable, of } from 'rxjs';
 import { AppUser } from '../models/app-user';
+import { userSecrate } from '../models/user-secrate';
 import { UserService } from './user.service';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any;
-  constructor(
-    private afAuth: AngularFireAuth,
-    private router: Router,
-    private userService: UserService
-  ) {
-    this.afAuth.authState.subscribe((user) => {
-      if (user) {
-        console.log(user.uid);
-        this.userService.getUserByuid(user.uid).then((appUser) => {
-					console.log(appUser);
-          localStorage.setItem('user', JSON.stringify(appUser[0]));
-        });
-      } else {
-        localStorage.setItem('user', null);
-      }
-    });
-  }
+  constructor(private router: Router, private userService: UserService) {}
 
   GoogleAuth() {
     return this.AuthLogin(new auth.auth.GoogleAuthProvider());
   }
 
+  RegisterUser(appUser: AppUser) {
+    this.userService.registerUser(appUser);
+  }
+
+  LoginWithEmailPass(userSecrate: userSecrate) {
+    const { email, password } = userSecrate;
+    this.userService
+      .authenticateUser({ email, password })
+      .subscribe((response) => {
+        this.setUser(response);
+        // const returnUrl = localStorage.getItem('returnUrl') || '';
+        // this.router.navigate([returnUrl]);
+      });
+  }
+
   logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    this.afAuth.signOut();
+    this.unsetUser();
     this.router.navigate(['login']);
   }
 
   private AuthLogin(provider) {
-    return this.afAuth.signInWithPopup(provider);
+    // return this.afAuth.signInWithPopup(provider);
   }
 
   isLoggedIn() {
@@ -56,5 +51,17 @@ export class AuthService {
 
   private loginCheck() {
     return true; // here we verify token by token verify api
+  }
+
+  private setUser(respose) {
+    const { token } = respose;
+    localStorage.setItem('token', token);
+    localStorage.setItem('isLoggedIn', 'true');
+  }
+
+  private unsetUser() {
+    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 }

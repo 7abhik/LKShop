@@ -8,7 +8,7 @@ import { HomeComponent } from '../dashboard/home/home.component';
 import { AboutComponent } from '../dashboard/about/about.component';
 import { ProductFormComponent } from '../admin/product-form/product-form.component';
 import { MemberFormComponent } from '../admin/member-form/member-form.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [

@@ -1,11 +1,9 @@
 export interface AppUser {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  isAdmin: boolean;
-  mobile: string;
-  age: number;
-  desc: string;
-  uid: string;
-  profileImage: string;
-  userRole: string;
+  password?: string;
+  isAdmin?: boolean;
+  profileImage?: string;
+  userRole?: string;
 }

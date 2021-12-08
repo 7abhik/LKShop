@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -8,22 +9,28 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router) {}
-
-  googleLogin() {
-    this.auth
-      .GoogleAuth()
-      .then((result) => {
-				localStorage.setItem('isLoggedIn', 'true');
-				localStorage.setItem('token','tt');
-        this.router.navigate([''])
-      })
-      .catch((error) => {
-        alert(error);
-      });
+  constructor(private authService: AuthService, private route: ActivatedRoute) {
+    console.log('Login constructor called');
+    localStorage.setItem(
+      'returnUrl',
+      this.route.snapshot.queryParams.returnUrl || '/'
+    );
   }
 
-  emailLogin() {}
+  googleLogin() {
+    // this.auth.GoogleAuth();
+    alert('Google login comming soon');
+  }
+
+  userData = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl(''),
+    rememberme: new FormControl(false),
+  });
+
+  emailLogin() {
+    this.authService.LoginWithEmailPass(this.userData.value);
+  }
 
   ngOnInit(): void {}
 }
