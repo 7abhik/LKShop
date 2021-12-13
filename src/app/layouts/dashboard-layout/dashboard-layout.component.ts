@@ -3,13 +3,17 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-dashboard-layout',
   templateUrl: './dashboard-layout.component.html',
-  styleUrls: ['./dashboard-layout.component.scss']
+  styleUrls: ['./dashboard-layout.component.scss'],
 })
 export class DashboardLayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+  public isLoading: boolean = true;
+  constructor() {
+    console.log('dahboard layout constructor');
   }
 
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 2000);
+  }
 }

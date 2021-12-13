@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-member-form',
@@ -9,11 +7,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./member-form.component.scss'],
 })
 export class MemberFormComponent implements OnInit {
-  constructor(private db: AngularFirestore) {}
+  constructor() {}
 
   profileData = new FormGroup({
-    fullName: new FormControl('AB Kr'),
-    mobile: new FormControl('8130'),
+    fullName: new FormControl('Abhishek'),
+    mobile: new FormControl('8130845883'),
+    joinDate: new FormControl('23/09/1993'),
+    age: new FormControl('28'),
+    userRole: new FormControl('cleaner'),
+    profileImage: new FormControl('https://www.photoshopessentials.com/newsite/wp-content/uploads/2018/08/resize-images-print-photoshop-f.jpg'),
+    desc: new FormControl('desc'),
   });
 
   onSubmit() {
@@ -26,15 +29,3 @@ export class MemberFormComponent implements OnInit {
   ngOnInit(): void {}
 }
 
-/* console.log('show Data');
-    this.db
-      .collection('members')
-      .get()
-      .subscribe((members) => {
-        members.docs.forEach((doc) => {
-          console.log('Data=>  ', doc.data());
-          console.log('get=>  ', doc.get);
-          console.log('id=>  ', doc.id);
-          console.log('ref=>  ', doc.ref);
-        });
-      }); */

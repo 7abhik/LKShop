@@ -18,7 +18,10 @@ export class AuthService {
   }
 
   RegisterUser(appUser: AppUser) {
-    this.userService.registerUser(appUser);
+    this.userService.registerUser(appUser).subscribe((response) => {
+      this.setUser(response);
+      document.location.href = '/';
+    });
   }
 
   LoginWithEmailPass(userSecrate: userSecrate) {
@@ -27,8 +30,8 @@ export class AuthService {
       .authenticateUser({ email, password })
       .subscribe((response) => {
         this.setUser(response);
-        // const returnUrl = localStorage.getItem('returnUrl') || '';
-        // this.router.navigate([returnUrl]);
+        const returnUrl = localStorage.getItem('returnUrl') || '';
+        document.location.href = returnUrl;
       });
   }
 
