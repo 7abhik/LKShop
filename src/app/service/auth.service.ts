@@ -5,6 +5,7 @@ import auth from 'firebase/app';
 import { AppUser } from '../models/app-user';
 import { userSecrate } from '../models/user-secrate';
 import { UserService } from './user.service';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -53,7 +54,13 @@ export class AuthService {
   }
 
   private loginCheck() {
-    return true; // here we verify token by token verify api
+    const token = localStorage.getItem('token');
+    return this.userService.validateUser(token).pipe(
+      map((response) => {
+        const user = response.json();
+        return user.status == 'success' ? true : false;
+      })
+    );
   }
 
   private setUser(respose) {

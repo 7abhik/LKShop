@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-member-form',
@@ -7,25 +8,34 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./member-form.component.scss'],
 })
 export class MemberFormComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   profileData = new FormGroup({
-    fullName: new FormControl('Abhishek'),
+    firstName: new FormControl('Abhishek'),
+    lastName: new FormControl('kumar'),
     mobile: new FormControl('8130845883'),
     joinDate: new FormControl('23/09/1993'),
     age: new FormControl('28'),
-    userRole: new FormControl('cleaner'),
-    profileImage: new FormControl('https://www.photoshopessentials.com/newsite/wp-content/uploads/2018/08/resize-images-print-photoshop-f.jpg'),
+    role: new FormControl('cleaner'),
+    profileImage: new FormControl(
+      'https://www.photoshopessentials.com/newsite/wp-content/uploads/2018/08/resize-images-print-photoshop-f.jpg'
+    ),
     desc: new FormControl('desc'),
   });
 
   onSubmit() {
     console.log(this.profileData.value);
-		console.log("*****************************************");
+    console.log('*****************************************');
     console.log(this.profileData);
-
+    this.profileData.value.isAdmin =
+      this.profileData.value.role == 'manager' ? true : false;
+    this.profileData.value.email = '';
+    this.userService
+      .addMemeber(this.profileData.value)
+      .subscribe((response) => {
+        console.log(response);
+      });
   }
 
   ngOnInit(): void {}
 }
-
