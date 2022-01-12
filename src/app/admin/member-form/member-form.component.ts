@@ -27,11 +27,12 @@ export class MemberFormComponent implements OnInit {
     console.log(this.profileData.value);
     console.log('*****************************************');
     console.log(this.profileData);
+    const token = localStorage.getItem('token');
     this.profileData.value.isAdmin =
       this.profileData.value.role == 'manager' ? true : false;
     this.profileData.value.email = '';
     this.userService
-      .addMemeber(this.profileData.value)
+      .addMemeber(token, this.profileData.value)
       .subscribe((response) => {
         console.log(response);
       });
